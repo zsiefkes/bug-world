@@ -17,7 +17,7 @@ public class Bug {
 	public Bug() {		
 		this.species = "Pholcus phalangioides";
 		this.name = "Daddy Longlegs";
-		this.symbol = 's';
+		this.symbol = '*';
 		this.x = 0;
 		this.y = 0;
 		this.energy = 100;
@@ -26,8 +26,8 @@ public class Bug {
 		
 	}
 	
-	// overloaded constructor function taking all attributes as arguments
-	public Bug(String species, String name, char symbol, int x, int y, int energy, int id) {
+	// overloaded constructor function taking all attributes except id as arguments
+	public Bug(String species, String name, char symbol, int x, int y, int energy) {
 		this.species = species;
 		this.name = name;
 		this.symbol = symbol;
@@ -98,7 +98,7 @@ public class Bug {
 
 	// toString and toText methods
 	public String toString() {
-		return "Bug " + name + " " + symbol + " is at " + x + ", " + y
+		return name + " " + symbol + " is at " + x + ", " + y
 				+ " and has " + energy + " energy remaining.";
 	}
 	
