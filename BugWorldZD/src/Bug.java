@@ -98,13 +98,13 @@ public class Bug {
 
 	// toString and toText methods
 	public String toString() {
-		return name + " " + symbol + " is at " + x + ", " + y
+		return name + " (" + symbol + ") is at " + x + ", " + y
 				+ " and has " + energy + " energy remaining.";
 	}
 	
 	public String toText() {
-		return "Bug [species=" + species + ", name=" + name + ", symbol=" + symbol + ", x=" + x + ", y=" + y
-				+ ", energy=" + energy + ", id=" + id + "]";
+		return "Bug\n species: " + species + "\n name: " + name + "\n symbol: " + symbol + "\n x: " + x + "\n y: " + y
+				+ "\n energy: " + energy + "\n id: " + id + "";
 	}
 	
 }
