@@ -139,5 +139,17 @@ public class Main {
 		
 		// draw that world!
 		world.drawWorld();
+		
+		// update world and redraw a certain number of times with a sleep in between to "animate"
+		for (int i=0; i<10; i++) {
+			world.updateWorld();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			world.drawWorld();
+		}
 	}
 }

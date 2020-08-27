@@ -9,6 +9,7 @@ public class Bug {
 	private int y; // vertical position
 	private int energy;
 	private int id; // unique id
+	private World world; // world the bug belongs to, if any.
 	
 	// field to store ids
 	private ArrayList<Integer> idList = new ArrayList<Integer>(); 
@@ -21,12 +22,12 @@ public class Bug {
 		this.x = 0;
 		this.y = 0;
 		this.energy = 100;
+		this.world = null;
 		// generate unique id based on idList size
 		this.id = this.idList.size() + 1;
-		
 	}
 	
-	// overloaded constructor function taking all attributes except id as arguments
+	// overloaded constructor function taking all attributes except id as arguments. also does not initiate with a world.
 	public Bug(String species, String name, char symbol, int x, int y, int energy) {
 		this.species = species;
 		this.name = name;
@@ -34,6 +35,7 @@ public class Bug {
 		this.x = x;
 		this.y = y;
 		this.energy = energy;
+		this.world = null;
 		// generate unique id based on idList size
 		this.id = this.idList.size() + 1;
 	}
@@ -53,6 +55,27 @@ public class Bug {
 		} else if (direction < 1) {
 			// move west
 			this.x--;
+		}
+		
+		// if the bug belongs to a world,
+		if (this.world != null) {
+			
+			// first check it did not move out of the world's borders. obtain world width and height
+			int width = this.world.getWidth();
+			int height = this.world.getHeight();
+			
+			// send it to the opposite side if it does! this world is a sphere!
+			if (this.x < 0) {
+				this.x = width - 1;
+			} else if (this.x > width - 1) {
+				this.x = 0;
+			} else if (this.y < 0) {
+				this.y = height - 1;
+			} else if (this.y > height - 1) {
+				this.y = 0;
+			}
+			
+			// next, check it did not move to a spot already occupied by another bug?
 		}
 	}
 	
@@ -108,6 +131,14 @@ public class Bug {
 
 	public int getId() {
 		return id;
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+	
+	public void setWorld(World world) {
+		this.world = world;
 	}
 
 	// toString and toText methods

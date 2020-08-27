@@ -59,13 +59,19 @@ public class World {
 			// randomly decide which subclass of bug, create bug and add to store 
 			double rand = Math.random();
 			System.out.printf("Random number: %.2f%n", rand);
+			
+			Bug bug = null;
 			if (rand < 0.334) {
-				this.bugs.add(new Grasshopper(name, x, y, energy));
+				bug = new Grasshopper(name, x, y, energy);
 			} else if (rand < 0.667) {
-				this.bugs.add(new Spider(name, x, y, energy));
+				bug = new Spider(name, x, y, energy);
 			} else if (rand < 1) {
-				this.bugs.add(new Ant(name, x, y, energy));
+				bug = new Ant(name, x, y, energy);
 			}
+			
+			// add bug to this world's list of bugs, and to bug's world attribute
+			this.bugs.add(bug);
+			bug.setWorld(this);
 		}
 	}
 	
@@ -99,11 +105,11 @@ public class World {
 	public void drawWorld() {
 		
 		// draw top border
-		System.out.print('+');
+		System.out.print('|');
 		for (int i = 0; i < width; i++) {
 			System.out.print('-');
 		}
-		System.out.println('+');
+		System.out.println('|');
 		
 		// draw each row. using y as counter to match coordinate position
 		for (int y = 0; y < height; y++) {
@@ -150,12 +156,22 @@ public class World {
 		}
 		
 		// draw bottom border
-		System.out.print('+');
+		System.out.print('|');
 		for (int i = 0; i < width; i++) {
 			System.out.print('-');
 		}
-		System.out.println('+');
+		System.out.println('|');
 		
+	}
+	
+	// randomly moves (or doesn't move) all the bugs in the world. bugs are not permitted to move outside the world.
+	// invokes move method on Bug class to move bugs - does not manipulate bug position directly. 
+	public void updateWorld() {
+		// loop over all bugs
+		for (Bug b : this.bugs) {
+			// generate random number between 0 and 1 and call move method
+			b.move(Math.random());
+		}
 	}
 
 	// Getters and Setters. Note no setter for bugs arrayList but has addBug and removeBug methods instead
