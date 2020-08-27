@@ -1,6 +1,6 @@
 
 public class Ant extends Bug {
-	private static String defaultSpecies = "Anoplolepis gracilipes";
+	private static String defaultSpecies = "Ant";
 	private static char defaultSymbol = '%';
 	
 	public Ant() {

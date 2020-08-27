@@ -124,10 +124,20 @@ public class Main {
 		}
 	}
 
-	
+	// entry point for bug world program. 
 	public static void main(String[] args) {
 		// create instance of Main class (run constructor)
-		new Main();
+		// new Main();
+		// create new world, specifying width and height
+		World world = new World(50, 10);
 		
+		// populate world with 10 bugs
+		world.genBugs(10);
+		
+		// print bug info
+		world.printBugInfo();
+		
+		// draw that world!
+		world.drawWorld();
 	}
 }

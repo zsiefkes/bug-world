@@ -38,16 +38,20 @@ public class Bug {
 		this.id = this.idList.size() + 1;
 	}
 
-	// change the bug's position, 1 px at a time, either North, East, South or West
-	// takes double between 0 and 1 as direction and determines movement using qua
+	// change the bug's position, 1 coordinate at a time, either North, East, South or West
+	// takes double between 0 and 1 as direction and determines movement using quadrants
 	public void move(double direction) {
 		if (direction < 0.25) {
+			// move north
 			this.y--;
 		} else if (direction < 0.5) {
+			// move east
 			this.x++;
 		} else if (direction < 0.75) {
+			// move south
 			this.y++;
 		} else if (direction < 1) {
+			// move west
 			this.x--;
 		}
 	}
@@ -108,8 +112,8 @@ public class Bug {
 
 	// toString and toText methods
 	public String toString() {
-		return name + " the " + species + " (" + symbol + ") is at " + x + ", " + y
-				+ " and has " + energy + " energy remaining.";
+		return name + " the " + species + " (" + symbol + ") is at (" + x + ", " + y
+				+ ") and has " + energy + " energy remaining.";
 	}
 	
 	public String toText() {

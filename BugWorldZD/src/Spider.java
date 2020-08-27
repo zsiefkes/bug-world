@@ -1,6 +1,6 @@
 public class Spider extends Bug {
 	// set default species and symbol as private static variables for use in constructors
-	private static String defaultSpecies = "Pholcus phalangioides";
+	private static String defaultSpecies = "Spider";
 	private static char defaultSymbol = '#';
 	
 	// default constructor taking no arguments
