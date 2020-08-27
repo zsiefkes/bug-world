@@ -17,6 +17,11 @@ public class Main {
 		// print out list of bugs
 		this.printBugs();
 		
+		// move a random bug
+		int bugInt = (int)(Math.random()*this.bugs.size());
+		this.moveRandom(this.bugs.get(bugInt));
+		
+		
 	}
 	
 	public void userInputAttributes() {
@@ -55,6 +60,26 @@ public class Main {
 		
 		// add bug to store
 		this.bugs.add(bug);
+	}
+	
+	// move a bug in a random direction 100 times to complete task 5
+	public void moveRandom(Bug bug) {
+		
+		// number of times to move the bug
+		int numMoves = 100;
+		
+		// print message
+		System.out.printf("Moving bug %s randomly %d times.%n", bug.getName(), numMoves);
+		
+		// repeat numMoves times
+		for (int i=0; i < numMoves; i++) {
+			
+			// obtain random direction 
+			bug.move((int)(Math.random() * 4 + 1));
+			
+			// print new x, y position and direction moved
+			System.out.printf("New position: %d %d%n", bug.getX(), bug.getY());
+		}
 	}
 	
 	// method to complete task 1 and test bug toString methods.
