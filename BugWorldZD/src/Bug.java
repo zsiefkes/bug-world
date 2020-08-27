@@ -15,8 +15,8 @@ public class Bug {
 
 	// overloaded constructor, takes no arguments and sets pre-defined attributes 
 	public Bug() {		
-		this.species = "Pholcus phalangioides";
-		this.name = "Daddy Longlegs";
+		this.species = "Coccinella septempunctata";
+		this.name = "Frankie";
 		this.symbol = '*';
 		this.x = 0;
 		this.y = 0;
@@ -38,7 +38,21 @@ public class Bug {
 		this.id = this.idList.size() + 1;
 	}
 
-	// Getters and setters
+	// change the bug's position, 1 px at a time, either North, East, South or West
+	// takes double between 0 and 1 as direction and determines movement using qua
+	public void move(double direction) {
+		if (direction < 0.25) {
+			this.y--;
+		} else if (direction < 0.5) {
+			this.x++;
+		} else if (direction < 0.75) {
+			this.y++;
+		} else if (direction < 1) {
+			this.x--;
+		}
+	}
+	
+	// Getters and setters (no setId method)
 
 	public String getSpecies() {
 		return species;
@@ -92,13 +106,9 @@ public class Bug {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	// toString and toText methods
 	public String toString() {
-		return name + " (" + symbol + ") is at " + x + ", " + y
+		return name + " the " + species + " (" + symbol + ") is at " + x + ", " + y
 				+ " and has " + energy + " energy remaining.";
 	}
 	

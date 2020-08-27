@@ -9,22 +9,42 @@ public class Main {
 	// constructor
 	public Main() {
 		// run task 1 method
-		this.createTwoBugs();
+//		this.createTwoBugs();
 		
-		// prompt user to create a bug
-		this.userInputAttributes();
+		// prompt user to create a bug and add result to store
+//		this.bugs.add(this.userInputAttributes());
+		
+		// move a random bug
+//		int bugInt = (int)(Math.random()*this.bugs.size());
+//		this.moveRandom(this.bugs.get(bugInt));
+		
+		// attempt to create a um. grasshopper and add to list of bugs
+		Grasshopper gh = new Grasshopper();
+		this.bugs.add(gh);
+		
+		// check whether the methods in Bug exist in Grasshopper too. yes! fantastic
+		System.out.println(gh.toString());
+		System.out.println(gh.toText());
+
+		// move the grasshopper
+		this.moveRandom(gh);
+		
+		// create a spider using empty constructor 
+		Spider sp = new Spider();
+		this.bugs.add(sp);
+		
+		// set spider's name using setter method
+		sp.setName("Bob");
+		
+		// create an ant using constructor with args
+		Ant ant = new Ant("Sarah", 10, 20, 300);
+		this.bugs.add(ant);
 		
 		// print out list of bugs
 		this.printBugs();
-		
-		// move a random bug
-		int bugInt = (int)(Math.random()*this.bugs.size());
-		this.moveRandom(this.bugs.get(bugInt));
-		
-		
 	}
 	
-	public void userInputAttributes() {
+	public Bug userInputAttributes() {
 		// open scanner on System.in. note that we do not close this
 		Scanner scan = new Scanner(System.in);
 		
@@ -55,11 +75,8 @@ public class Main {
 		// skip to end of line as scanner will not automatically do this when using nextInt()
 		scan.nextLine();
 		
-		// create new bug
-		Bug bug = new Bug(species, name, symbol, x, y, energy);
-		
-		// add bug to store
-		this.bugs.add(bug);
+		// create new bug and return the bug
+		return new Bug(species, name, symbol, x, y, energy);
 	}
 	
 	// move a bug in a random direction 100 times to complete task 5
@@ -74,8 +91,8 @@ public class Main {
 		// repeat numMoves times
 		for (int i=0; i < numMoves; i++) {
 			
-			// obtain random direction 
-			bug.move((int)(Math.random() * 4 + 1));
+			// move random direction 
+			bug.move(Math.random());
 			
 			// print new x, y position and direction moved
 			System.out.printf("New position: %d %d%n", bug.getX(), bug.getY());
