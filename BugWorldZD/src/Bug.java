@@ -43,18 +43,37 @@ public class Bug {
 	// change the bug's position, 1 coordinate at a time, either North, East, South or West
 	// takes double between 0 and 1 as direction and determines movement using quadrants
 	public void move(double direction) {
+		
+		// store initial position
+		int initX = this.x;
+		int initY = this.y;
+		
+		// declare variables to store new position. initialize new coordinates as initial coordinates.
+		int newX = initX;
+		int newY = initY;
+		
+		// argument direction should be between 0 and 1. if not, no movement happens
 		if (direction < 0.25) {
+			
 			// move north
-			this.y--;
+			newY = initY - 1;
+
 		} else if (direction < 0.5) {
+			
 			// move east
-			this.x++;
+			newX = initX + 1;
+		
 		} else if (direction < 0.75) {
+		
 			// move south
-			this.y++;
+			newY = initY + 1;
+		
 		} else if (direction < 1) {
+			
 			// move west
-			this.x--;
+			newX = initX - 1;
+			
+			
 		}
 		
 		// if the bug belongs to a world,
@@ -65,18 +84,35 @@ public class Bug {
 			int height = this.world.getHeight();
 			
 			// send it to the opposite side if it does! this world is a sphere!
-			if (this.x < 0) {
-				this.x = width - 1;
-			} else if (this.x > width - 1) {
-				this.x = 0;
-			} else if (this.y < 0) {
-				this.y = height - 1;
-			} else if (this.y > height - 1) {
-				this.y = 0;
+			// note that the coordinates begin at 0 and end at width -1 and height - 1
+			
+			// check x coordinate
+			if (newX < 0) {
+				newX = width - 1;
+			} else if (newX > width - 1) {
+				newX = 0;
 			}
 			
-			// next, check it did not move to a spot already occupied by another bug?
+			// check y coordinate
+			if (newY < 0) {
+				newY = height - 1;
+			} else if (newY > height - 1) {
+				newY = 0;
+			}
+			
+			// next, check it did not move to a spot already occupied by another bug.
+			if (world.isOccupied(newX, newY)) {
+				
+				// if it is, move it back to its original position
+				newX = initX;
+				newY = initY;
+			}
+			
 		}
+		
+		// set new position
+		this.x = newX;
+		this.y = newY;
 	}
 	
 	// Getters and setters (no setId method)
