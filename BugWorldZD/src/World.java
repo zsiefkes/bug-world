@@ -5,8 +5,9 @@ public class World {
 	private int width;
 	private int height;
 
-	// field for storing unspecified number of bugs
+	// fields for storing unspecified number of bugs and plants 
 	ArrayList<Bug> bugs = new ArrayList<Bug>();
+	ArrayList<Plant> plants = new ArrayList<Plant>();
 
 	// constructor taking width and height
 	public World(int width, int height) {
@@ -17,6 +18,7 @@ public class World {
 	// check if anything is residing in a certain position and return a boolean
 	// indicating so.
 	public boolean isOccupied(int x, int y) {
+		
 		// boolean to return
 		boolean isOccupied = false;
 
@@ -29,9 +31,53 @@ public class World {
 				break;
 			}
 		}
+		
+		// loop through all plants
+		for (Plant p : this.plants) {
+			// check if bug's position matches input arguments
+			if (p.getX() == x && p.getY() == y) {
+				// set boolean to true and break out of loop
+				isOccupied = true;
+				break;
+			}
+		}
 
 		// return boolean
 		return isOccupied;
+	}
+	
+	// randomly generate a specified number of plants
+	public void genPlants(int numPlants) {
+		
+		for (int i = 0; i < numPlants; i++) {
+			
+			// randomly pick a size between 0 and 9
+			int size = (int)(Math.random() * 9);
+			
+			// randomly pick coordinates within world boundaries
+			int x = (int)(Math.random() * this.width);
+			int y = (int)(Math.random() * this.height);
+
+			// check position is not already occupied and try again until one is found. or, give up after 20 tries
+			int count = 0;
+			while (isOccupied(x, y) || count > 20) {
+				x = (int) (Math.random() * width);
+				y = (int) (Math.random() * height);
+				count++;
+			}
+			
+			// set default plant symbol for now
+			char symbol = '+';
+			
+			// create plant
+			Plant plant = new Plant(size, symbol, x, y);
+			
+			// set world on plant to this world
+			plant.setWorld(this);
+			
+			// add plant to list of plants
+			this.plants.add(plant);
+		}
 	}
 
 	// randomly generate a specified number of bugs
@@ -105,6 +151,13 @@ public class World {
 		}
 	}
 
+	// print list of plants
+	public void printPlantInfo() {
+		for (Plant p : this.plants) {
+			System.out.println(p.toString());
+		}
+	}
+
 	// print out text rendering of world including all bugs at their locations as
 	// represented by their
 	public void drawWorld() {
@@ -125,21 +178,41 @@ public class World {
 			// iterate through the columns
 			for (int x = 0; x < width; x++) {
 
-				// flag whether this position is occupied - Michael checks using
-				boolean hasBug = false;
+				// flag whether this position is occupied
+				boolean hasObject = false;
 
+				// this would be much faster / not involve having to loop through all the bugs and plants and check their coordinates if all the world objects (need to use an interface here?) were stored in a 2d array containing all of the positions.
+				
 				// loop through all bugs to check if position matches
 				for (Bug b : this.bugs) {
-
+					
 					// check if bug is in this position. at most one bug will be as we are
 					// preventing multiple objects from occupying the same position
 					if (b.getX() == x && b.getY() == y) {
-
+						
 						// set flag to true
-						hasBug = true;
-
+						hasObject = true;
+						
 						// draw bug's symbol
 						System.out.print(b.getSymbol());
+						
+						// break out of checking bugs loop
+						break;
+					}
+				}
+
+				// loop through all plants to check if position matches
+				for (Plant p : this.plants) {
+
+					// check if bug is in this position. at most one bug will be as we are
+					// preventing multiple objects from occupying the same position
+					if (p.getX() == x && p.getY() == y) {
+
+						// set flag to true
+						hasObject = true;
+
+						// draw plant's symbol
+						System.out.print(p.getSymbol());
 
 						// break out of checking bugs loop
 						break;
@@ -147,16 +220,10 @@ public class World {
 				}
 
 				// if no bug was printed, print an empty space
-				if (!hasBug) {
+				if (!hasObject) {
 					System.out.print(" ");
 				}
 
-				// Michael's code figured this by checking the value of i. I'm choosing to just
-				// break out of the loop once a bug has been drawn so. not an option using that
-				// method
-//				if (i == this.bugs.size()) {					
-//					System.out.print(" ");
-//				}
 			}
 
 			// draw right border and move onto the next line

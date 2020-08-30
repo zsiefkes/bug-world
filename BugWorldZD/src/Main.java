@@ -131,11 +131,13 @@ public class Main {
 		// create new world, specifying width and height
 		World world = new World(50, 10);
 		
-		// populate world with 10 bugs
+		// populate world with 10 bugs and 10 plants
 		world.genBugs(10);
+		world.genPlants(10);
 		
-		// print bug info
+		// print bug and plant info
 		world.printBugInfo();
+		world.printPlantInfo();
 		
 		// draw that world!
 		world.drawWorld();
