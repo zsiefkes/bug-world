@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-	
+		
 	// field to store bugs
 	ArrayList<Bug> bugs = new ArrayList<Bug>();
 	
@@ -139,19 +140,29 @@ public class Main {
 		world.printBugInfo();
 		world.printPlantInfo();
 		
-		// draw that world!
-		world.drawWorld();
+		// which is the biggest plant? check the comparator works first
+		Plant p1 = world.plants.get(0);
+		Plant p2 = world.plants.get(1);
+		System.out.printf("Plant %d compared to plant %d returns %d", p1.getId(), p2.getId(), new PlantSizeComparator().compare(p1, p2));
 		
-		// update world and redraw a certain number of times with a sleep in between to "animate"
-		for (int i=0; i<10; i++) {
-			world.updateWorld();
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			world.drawWorld();
-		}
+		// sort plant list from smallest to biggest
+//		PlantSizeComparator plantSizeFilter = new PlantSizeComparator();
+//		Collections.sort(world.plants, plantSizeFilter);
+		Collections.sort(world.plants, new PlantSizeComparator());
+
+		// reprint plant list
+		world.printPlantInfo();
+		
+		// sort bug list based on energy level
+		Collections.sort(world.bugs, new BugEnergyComparator());
+		
+		// reprint bug list
+		world.printBugInfo();
+		
+		// draw that world!
+//		world.drawWorld();
+		
+		// animate world
+//		world.animateWorld(10);
 	}
 }

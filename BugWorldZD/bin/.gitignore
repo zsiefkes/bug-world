@@ -1,6 +1,4 @@
-/Constants.class
-/Spider.class
-/Grasshopper.class
-/Ant.class
-/World.class
-/Plant.class
+/Sort.class
+/PlantSize.class
+/PlantSizeComparator.class
+/BugEnergyComparator.class

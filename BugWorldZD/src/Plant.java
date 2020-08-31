@@ -10,8 +10,8 @@ public class Plant {
 	private World world; // world plant belongs to, if any
 	private int id; // let's have unique identifiers, too.
 
-	// field to store ids
-	ArrayList<Integer> idList = new ArrayList<Integer>();
+	// static field to store ids
+	private static ArrayList<Integer> idList = new ArrayList<Integer>();
 	
 	// constructor
 	public Plant(int size, char symbol, int x, int y) {
@@ -22,9 +22,17 @@ public class Plant {
 		// set world to null by default
 		this.world = null;
 		// create unique id based on idList size, beginning at id = 1 (not 0).
-		this.id = this.idList.size() + 1;
+		this.id = idList.size() + 1;
+		// add id to idList
+		idList.add(id);
 	}
 
+	// find the biggest plant
+//	public Plant biggestPlant(ArrayList<Plant> plants) {
+//		
+//		
+//	}
+	
 	// getters and setters
 
 	public int getSize() {

@@ -11,8 +11,8 @@ public class Bug {
 	private int id; // unique id
 	private World world; // world the bug belongs to, if any.
 	
-	// field to store ids
-	private ArrayList<Integer> idList = new ArrayList<Integer>(); 
+	// static field to store ids. don't forget it has to be static!!!
+	private static ArrayList<Integer> idList = new ArrayList<Integer>(); 
 
 	// overloaded constructor, takes no arguments and sets pre-defined attributes 
 	public Bug() {		
@@ -24,7 +24,9 @@ public class Bug {
 		this.energy = 100;
 		this.world = null;
 		// generate unique id based on idList size
-		this.id = this.idList.size() + 1;
+		this.id = idList.size() + 1;
+		// add id to idList
+		idList.add(id);
 	}
 	
 	// overloaded constructor function taking all attributes except id as arguments. also does not initiate with a world.
@@ -37,7 +39,9 @@ public class Bug {
 		this.energy = energy;
 		this.world = null;
 		// generate unique id based on idList size
-		this.id = this.idList.size() + 1;
+		this.id = idList.size() + 1;
+		// add id to idList
+		idList.add(id);
 	}
 
 	// change the bug's position, 1 coordinate at a time, either North, East, South or West

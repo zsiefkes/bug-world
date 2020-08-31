@@ -8,7 +8,7 @@ public class World {
 	// fields for storing unspecified number of bugs and plants 
 	ArrayList<Bug> bugs = new ArrayList<Bug>();
 	ArrayList<Plant> plants = new ArrayList<Plant>();
-
+	
 	// constructor taking width and height
 	public World(int width, int height) {
 		this.width = width;
@@ -148,6 +148,7 @@ public class World {
 	public void printBugInfo() {
 		for (Bug b : this.bugs) {
 			System.out.println(b.toString());
+//			System.out.println(b.toText());
 		}
 	}
 
@@ -249,6 +250,20 @@ public class World {
 			// generate random number between 0 and 1 and call move method
 			b.move(Math.random());
 
+		}
+	}
+	
+	// run animation of world, updating and redrawing a specified number of times update world with a thread sleep in between 
+	public void animateWorld(int numUpdates) {
+		for (int i=0; i<numUpdates; i++) {
+			this.updateWorld();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.drawWorld();
 		}
 	}
 
