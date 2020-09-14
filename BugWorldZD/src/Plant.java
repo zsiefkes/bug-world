@@ -27,6 +27,8 @@ public class Plant {
 		idList.add(id);
 	}
 
+	// if you wanted to set the symbol as the size, can use .charAt??
+	
 	// find the biggest plant
 //	public Plant biggestPlant(ArrayList<Plant> plants) {
 //		

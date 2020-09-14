@@ -155,7 +155,16 @@ public class Main {
 		
 		// sort bug list based on energy level
 		Collections.sort(world.bugs, new BugEnergyComparator());
+		// reprint bug list
+		world.printBugInfo();
 		
+		// sort bug list by species first then by name
+		Collections.sort(world.bugs, new BugSpeciesNameComparator());
+		// reprint bug list
+		world.printBugInfo();
+
+		// sort bug list by id using compareTo method on Bug class which now implements Comparable<Bug>
+		world.bugs.sort(null);
 		// reprint bug list
 		world.printBugInfo();
 		

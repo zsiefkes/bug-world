@@ -202,25 +202,29 @@ public class World {
 					}
 				}
 
-				// loop through all plants to check if position matches
-				for (Plant p : this.plants) {
-
-					// check if bug is in this position. at most one bug will be as we are
-					// preventing multiple objects from occupying the same position
-					if (p.getX() == x && p.getY() == y) {
-
-						// set flag to true
-						hasObject = true;
-
-						// draw plant's symbol
-						System.out.print(p.getSymbol());
-
-						// break out of checking bugs loop
-						break;
+				// if a bug is not in this position,
+				if (!hasObject) {
+					
+					// loop through all plants to check if position matches
+					for (Plant p : this.plants) {
+						
+						// check if bug is in this position. at most one bug will be as we are
+						// preventing multiple objects from occupying the same position
+						if (p.getX() == x && p.getY() == y) {
+							
+							// set flag to true
+							hasObject = true;
+							
+							// draw plant's symbol
+							System.out.print(p.getSymbol());
+							
+							// break out of checking bugs loop
+							break;
+						}
 					}
 				}
 
-				// if no bug was printed, print an empty space
+				// if no object is in this position, print an empty space
 				if (!hasObject) {
 					System.out.print(" ");
 				}

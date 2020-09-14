@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class Bug {
+public class Bug implements Comparable<Bug> {
+	
 	// instance attributes
 	private String species;
 	private String name;
@@ -118,6 +119,13 @@ public class Bug {
 		this.x = newX;
 		this.y = newY;
 	}
+
+	@Override
+	public int compareTo(Bug otherBug) {
+		// compareTo method fulfilling Comparable<Bug> interface
+		// set natural ordering on bugs using their integer id.
+		return Integer.compare(getId(), otherBug.getId());
+	}
 	
 	// Getters and setters (no setId method)
 
@@ -191,5 +199,6 @@ public class Bug {
 		return "Bug\n species: " + species + "\n name: " + name + "\n symbol: " + symbol + "\n x: " + x + "\n y: " + y
 				+ "\n energy: " + energy + "\n id: " + id + "";
 	}
+
 	
 }
